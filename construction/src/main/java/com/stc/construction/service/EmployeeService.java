@@ -55,20 +55,31 @@ public class EmployeeService {
 
     // Update employee
     public ResponseEntity<String> updateEmployee(Employee employee, Integer id) {
-        Employee existingEmployee = employeeDoa.findById(id).orElseThrow();
+        try {
+            Employee existingEmployee = employeeDoa.findById(id).orElseThrow();
         
-        existingEmployee.setAddress(employee.getAddress());
-        existingEmployee.setContact_no(employee.getContact_no());
-        existingEmployee.setRole(employee.getRole());
-     
-        employeeDoa.save(existingEmployee);
-        return new ResponseEntity<>("Employee updated successfully", HttpStatus.OK);
+            existingEmployee.setAddress(employee.getAddress());
+            existingEmployee.setContact_no(employee.getContact_no());
+            existingEmployee.setRole(employee.getRole());
+        
+            employeeDoa.save(existingEmployee);
+            return new ResponseEntity<>("Employee updated successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Employee not found", HttpStatus.BAD_REQUEST);
     }
      
-
     // Delete employee
     public ResponseEntity<String> deleteEmployee(Integer id) {
-        employeeDoa.deleteById(id);
-        return new ResponseEntity<>("Employee deleted successfully", HttpStatus.OK);
+        try {
+            Employee existingEmployee = employeeDoa.findById(id).orElseThrow();
+            employeeDoa.delete(existingEmployee);
+
+            return new ResponseEntity<>("Employee deleted successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Employee not found", HttpStatus.BAD_REQUEST);
     }
 }
