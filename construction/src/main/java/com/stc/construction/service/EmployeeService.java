@@ -38,10 +38,37 @@ public class EmployeeService {
     }
 
     // Get employee by id
+    public ResponseEntity<Employee> getEmployeeById(Integer id) {
+        try {
+            return new ResponseEntity<>(employeeDoa.findById(id).get(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new Employee(), HttpStatus.BAD_REQUEST);
+    }
 
     // Add employee
+    public ResponseEntity<String> addEmployee(Employee employee) {
+        employeeDoa.save(employee);
+        return new ResponseEntity<>("Employee added successfully", HttpStatus.CREATED);
+    }
 
     // Update employee
+    public ResponseEntity<String> updateEmployee(Employee employee, Integer id) {
+        Employee existingEmployee = employeeDoa.findById(id).orElseThrow();
+        
+        existingEmployee.setAddress(employee.getAddress());
+        existingEmployee.setContact_no(employee.getContact_no());
+        existingEmployee.setRole(employee.getRole());
+     
+        employeeDoa.save(existingEmployee);
+        return new ResponseEntity<>("Employee updated successfully", HttpStatus.OK);
+    }
+     
 
     // Delete employee
+    public ResponseEntity<String> deleteEmployee(Integer id) {
+        employeeDoa.deleteById(id);
+        return new ResponseEntity<>("Employee deleted successfully", HttpStatus.OK);
+    }
 }
