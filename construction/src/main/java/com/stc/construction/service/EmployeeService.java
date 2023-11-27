@@ -82,4 +82,15 @@ public class EmployeeService {
         }
         return new ResponseEntity<>("Employee not found", HttpStatus.BAD_REQUEST);
     }
+
+    // Search employee
+    public ResponseEntity<List<Employee>> searchEmployee(String firstname) {
+        try {
+            return new ResponseEntity<>(employeeDoa.findByFirstnameContainingIgnoreCase(firstname), 
+            HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+    }
 }

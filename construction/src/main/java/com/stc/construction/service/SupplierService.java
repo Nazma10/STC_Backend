@@ -1,6 +1,7 @@
 package com.stc.construction.service;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,5 +81,16 @@ public class SupplierService {
             e.printStackTrace();
         }
         return new ResponseEntity<>("Supplier not found", HttpStatus.BAD_REQUEST);
+    }
+
+    // Search supplier
+    public ResponseEntity<List<Supplier>> searchSupplier(String name) {
+        try {
+            return new ResponseEntity<>(supplierDoa.findByNameContainingIgnoreCase(name),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 }

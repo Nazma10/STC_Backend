@@ -13,4 +13,6 @@ public interface SupplierDoa extends JpaRepository<Supplier, Integer>{
 
     void save(Optional<Supplier> existingSupplier);
 
+    List<Supplier> findByNameContainingIgnoreCase(String name);
+
 }

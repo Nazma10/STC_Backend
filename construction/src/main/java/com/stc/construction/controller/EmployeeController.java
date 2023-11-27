@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stc.construction.model.Employee;
@@ -57,5 +58,11 @@ public class EmployeeController {
     @DeleteMapping("delete/{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable Integer id) {
         return employeeService.deleteEmployee(id);
+    }
+
+    // Search employee
+    @GetMapping("search")
+    public ResponseEntity<List<Employee>> searchEmployee(@RequestParam String firstname) {
+        return employeeService.searchEmployee(firstname);
     }
 }

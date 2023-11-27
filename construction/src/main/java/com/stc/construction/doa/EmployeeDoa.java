@@ -9,4 +9,6 @@ import com.stc.construction.model.Employee;
 public interface EmployeeDoa extends JpaRepository<Employee, Integer> {
     
     List<Employee> findByRole(String role);
+
+    List<Employee> findByFirstnameContainingIgnoreCase(String firstname);
 }
