@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stc.construction.model.Rent;
 import com.stc.construction.model.Tool;
 import com.stc.construction.service.ToolService;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -39,7 +40,7 @@ public class ToolsController {
 
     // Add tool
     @PostMapping("add")
-    public ResponseEntity<String> addTool(Tool tool) {
+    public ResponseEntity<String> addTool(@RequestBody Tool tool) {
         return toolService.addTool(tool);
     }
 
@@ -62,4 +63,20 @@ public class ToolsController {
     }
 
     // Rent tool
+    @PutMapping("rent/{id}")
+    public ResponseEntity<String> rentTool(@PathVariable Integer id, @RequestBody Rent rent) {
+        return toolService.rentTool(id, rent);
+    }
+
+    // Return tool
+    @PutMapping("return/{id}")
+    public ResponseEntity<String> returnTool(@PathVariable Integer id) {
+        return toolService.returnTool(id);
+    }
+
+    // Get all rents
+    @GetMapping("allRents")
+    public ResponseEntity<List<Rent>> getAllRents() {
+        return toolService.getAllRents();
+    }
 }
