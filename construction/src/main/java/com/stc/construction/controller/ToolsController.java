@@ -79,4 +79,22 @@ public class ToolsController {
     public ResponseEntity<List<Rent>> getAllRents() {
         return toolService.getAllRents();
     }
+
+    // Search rent by tool name
+    @GetMapping("searchRent")
+    public ResponseEntity<List<Rent>> searchRent(@RequestParam String name) {
+        return toolService.searchRent(name);
+    }
+
+    // Get rent by Id
+    @GetMapping("getRent/{id}")
+    public ResponseEntity<Rent> getRentById(@PathVariable Integer id) {
+        return toolService.getRentById(id);
+    }
+
+    // Delete rent
+    @DeleteMapping("deleteRent/{id}")
+    public ResponseEntity<String> deleteRent(@PathVariable Integer id) {
+        return toolService.deleteRent(id);
+    }
 }

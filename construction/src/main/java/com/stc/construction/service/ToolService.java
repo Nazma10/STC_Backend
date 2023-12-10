@@ -167,4 +167,34 @@ public class ToolService {
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
+
+    // Search rent by tool name
+    public ResponseEntity<List<Rent>> searchRent(String name) {
+        try {
+            return new ResponseEntity<>(rentDoa.findByToolNameContainingIgnoreCase(name), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+    }
+
+    // Get rent by Id
+    public ResponseEntity<Rent> getRentById(Integer id) {
+        try {
+            return new ResponseEntity<>(rentDoa.findById(id).get(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    // Delete rent
+    public ResponseEntity<String> deleteRent(Integer id) {
+        try {
+            return new ResponseEntity<>("Rent deleted successfully", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>("Rent delete failed!", HttpStatus.BAD_REQUEST);
+    }
 }
