@@ -13,6 +13,5 @@ public interface RentDoa extends JpaRepository<Rent, Integer> {
     Optional<Tool> findByToolIdAndStatus(Integer id, String string);
 
     List<Rent> findByToolNameContainingIgnoreCase(String name);
-
     
 } 

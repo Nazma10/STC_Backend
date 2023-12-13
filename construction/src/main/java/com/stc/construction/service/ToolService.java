@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.stc.construction.doa.RentDoa;
 import com.stc.construction.doa.ToolDoa;
 import com.stc.construction.model.Rent;
-import com.stc.construction.model.Supplier;
 import com.stc.construction.model.Tool;
 
 @Service
